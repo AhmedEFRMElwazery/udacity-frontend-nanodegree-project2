@@ -14,23 +14,10 @@
 *author*: **Ahmed E. F. R. Mohammed**
 
 
-* [Instructions](#instructions)
-* [Features](#limitations)
-* [Task Status and Completion](#Tasks-Status-and-Completion)
-
-## Instructions
-
-This project started as a weather app journel, as specified and stated in the project ruberic of Task 2 in the front-end web development Udacity NanoDegree.
-
-However, ever since I discovered the power of APIs, and the wealth of data and information that they offer, I grew ever more greedy with the project. 
-
-I also decided to take advantage of the initiative by Udacity (i.e. to innovate and come up with one's own ideas) that was offered to us during project one (landing page), and I wasn't able to  do so due to the lack of time. Therefore, I decided to go all-in on it for this project.
-
-**Unfortunately, my first submission was rejected due to the fact that I overlooked some functionality with the original requirements. Therefore, I decided to scrap the whole thing, and start over**
-
-**Kindly note that all the project requirements as stipulated by Udacity's ruberic has been fulfilled nontheless, and they were integrated, one way or another, to serve the purpose of my app.**
-
-I belive the project now is more of a weather-oriented travel planner, in which the user get to search weather data, and at the same time gets information on available flights from his city to the city (destination) he searched using the **"Awesome Vacation" App**. Yep, that's what I am calling it right now. :laughing:
+* [Features](#Features)
+* [Testing](#Testing)
+* [Proper-use](#Proper-use)
+* [Task-Status-and-Completion](#Tasks-Status-and-Completion)
 
 ## Features
 
