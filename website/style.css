@@ -188,9 +188,20 @@ button[type="submit"]:hover{
     height: 100%;
 }
 
-.expand{
+.cityDataContainer{
     height: 25%;
     width: 100%;
+}
+
+.extra-info{
+    /* display: none; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
 }
 
 .flexible{
@@ -210,6 +221,26 @@ button[type="submit"]:hover{
     width: 22%;
     text-align: center;
     font-size: 14px;
+}
+
+.extraInforSubComponent{
+    height: 50%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+}
+
+.extraInforSubComponent img{
+    width: 20%; 
+}
+
+.extraInforSubComponent span{
+    width: 40%;
+    /* font-size: 12px; */
+    text-align: center;
 }
 
 .notification{

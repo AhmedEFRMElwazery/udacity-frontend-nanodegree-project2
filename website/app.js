@@ -77,45 +77,60 @@ const updateDOM = (obj)=>{
         const divElement = document.createElement('div');
         const anchorElement = document.createElement('a');
 
-        divElement.classList.add('expand');
+        divElement.classList.add('cityDataContainer');
         anchorElement.classList.add('flexible');
 
-        const cityNameSearched = document.createElement('div');
-        cityNameSearched.classList.add('HistorySubComponent');
-        cityNameSearched.setAttribute('id', 'citySearched');
+        const cityNameSearched = createSubComponent_partial('div', 'HistorySubComponent', 'citySearched');
         cityNameSearched.innerHTML= `${obj[i].cityName} (${obj[i].countryCode})`;
 
-        const searchDate = document.createElement('div');
-        searchDate.classList.add('HistorySubComponent');
-        searchDate.setAttribute('id', 'date');
+
+        const searchDate = createSubComponent_partial('div', 'HistorySubComponent', 'date');
         searchDate.innerHTML= `${obj[i].searchDate} <br/> <em style="font-size: 11px;">Time ${obj[i].searchTime}</em>`;
 
-        const temperature = document.createElement('div');
-        temperature.classList.add('HistorySubComponent');
-        temperature.setAttribute('id', 'temp');
+
+        const temperature = createSubComponent_partial('div', 'HistorySubComponent', 'temp')
         temperature.innerHTML= `${obj[i].temp}&#8457;`;
 
-        const feelings = document.createElement('div');
-        feelings.classList.add('HistorySubComponent');
-        feelings.setAttribute('id', 'content');
-        feelings.innerHTML= `${obj[i].userFeelings}`;
+        const feelings = createSubComponent_full(obj[i], 'userFeelings', 'div', 'HistorySubComponent', 'userFeelings')
 
         anchorElement.appendChild(cityNameSearched);
         anchorElement.appendChild(temperature);
         anchorElement.appendChild(feelings);
         anchorElement.appendChild(searchDate);
 
-        // let extraInfoElement = document.createElement('div');
+        const extraInfoElement = document.createElement('div');
+        extraInfoElement.classList.add('extra-info');
 
-        anchorElement.addEventListener('click', (e)=>{
+        const maxTemp = extraInfoSubComponent(obj[i], 'temp_max', 'div', 'extraInforSubComponent', 'Maxiumm Temperature', './imgs/icons/max-temperature.png', '&#8457;');
+        const minTemp = extraInfoSubComponent(obj[i], 'temp_min', 'div', 'extraInforSubComponent', 'Minimum Temperature', './imgs/icons/min-temperature.png', '&#8457;');
+        const weatherCondition = extraInfoSubComponent(obj[i], 'weatherDescription', 'div', 'extraInforSubComponent', 'General Weather Condition', obj[i].weatherIcon);
+        const humidity = extraInfoSubComponent(obj[i], 'humidity', 'div', 'extraInforSubComponent', 'Humidity', './imgs/icons/humidity.png', '&#37;');
+        const windSpeed = extraInfoSubComponent(obj[i], 'windSpeed', 'div', 'extraInforSubComponent', 'Wind Speed', './imgs/icons/windspeed.png', 'm&#47;s');
+
+        extraInfoElement.appendChild(maxTemp);
+        extraInfoElement.appendChild(minTemp);
+        extraInfoElement.appendChild(humidity);
+        extraInfoElement.appendChild(windSpeed);
+        extraInfoElement.appendChild(weatherCondition);
+
+        divElement.appendChild(anchorElement);
+
+        divElement.addEventListener('click', (e)=>{
             e.preventDefault();
             document.querySelector('html').style.background = `url('${obj[i].cityPhoto}&w=${body.clientWidth}&h=${body.clientHeight}') no-repeat center center fixed` ;
             document.querySelector('html').style.backgroundSize = "cover";
+            let extraContent = divElement.nextElementSibling;
+            if (extraContent.style.maxHeight){
+                extraContent.style.maxHeight = null;
+            } else {
+                extraContent.style.maxHeight = extraContent.scrollHeight + 60 +"px";
+            }
             
         });
 
-        divElement.appendChild(anchorElement);
+        
         historyList.appendChild(divElement);
+        historyList.appendChild(extraInfoElement);
 
         cityName.value = "";
         zipCode.value = "";
@@ -124,6 +139,28 @@ const updateDOM = (obj)=>{
     }
 };
 
+const createSubComponent_partial = (elemType, className, id)=>{
+    const subComponent = document.createElement(elemType);
+        subComponent.classList.add(className);
+        subComponent.setAttribute('id', id);
+        return subComponent
+}
+
+const createSubComponent_full = (obj, propertyName, elemType, className, id, message="")=>{
+    const subComponent = document.createElement(elemType);
+    subComponent.classList.add(className);
+    subComponent.setAttribute('id', id);
+    subComponent.innerHTML = `${message}${obj[propertyName]}`;
+    return subComponent;
+}
+
+const extraInfoSubComponent = (obj, propertyName, elemType, className, title, icon, unit="")=>{
+    const extraSubComponent = document.createElement(elemType);
+    extraSubComponent.classList.add(className);
+    extraSubComponent.innerHTML = `<img src='${icon}' title='${title}'> <span>${obj[propertyName]} ${unit}</span>`;
+    return extraSubComponent;
+
+}
 
 //API functions
 const getCityGeoData = async (baseurl, apikey)=>{
@@ -176,6 +213,11 @@ const getCityWeatherData = async(resp, baseUrl, apikey) =>{
         try{
             let retrievedWeatherData = await retrievedData.json();
             dataToBePostedToServer["temp"] = retrievedWeatherData.main.temp;
+            dataToBePostedToServer["temp_max"] = retrievedWeatherData.main.temp_max;
+            dataToBePostedToServer["temp_min"] = retrievedWeatherData.main.temp_min;
+            dataToBePostedToServer["humidity"] = retrievedWeatherData.main.humidity;
+            dataToBePostedToServer["windSpeed"] = retrievedWeatherData.wind.speed;
+            dataToBePostedToServer["weatherIcon"] = `http://openweathermap.org/img/wn/${retrievedWeatherData.weather[0].icon}@2x.png`;
             dataToBePostedToServer["weatherDescription"] = retrievedWeatherData.weather[0].description;
             dataToBePostedToServer["coords"] = retrievedWeatherData.coord;
             dataToBePostedToServer["countryCode"] = retrievedWeatherData.sys.country;
@@ -246,7 +288,6 @@ const getDataFromServer = async(url)=>{
     });
     try{
         const dataReceived = await request.json();
-        await console.log(dataReceived);
         return dataReceived;
     }catch(error){
         console.log(`Error from the "getDataFromServer" function: ${error}`);

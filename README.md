@@ -27,19 +27,25 @@
 
 
 
-* Responsive Design: The App is adaptive to different sizes of screens.
+* **Responsive Design**: The App is adaptive to different sizes of screens.
 
 ![A demo on the app responsive design](./website/imgs/documenation/ResponsiveDesign.gif "A demo on the app responsive design")
 
 
 
-* User Interactivity: The App background changes once the user clicks on a select item in the search history list.
+* **User Interactivity 1**: The App background changes once the user clicks on a select item in the search history list.
 
 ![User click changes the app background](./website/imgs/documenation/BackgroundChangeOnClick.gif "User clicks on the search history list items changes the app background")
 
 
 
-* Error notifications to guide the user on how to properly use the Weather Journal App (as seen in the "Testing" section below)
+* **User Interactivity 2**: Upon clicking an item in the search history list, the user gets extra weather for the day, namely **max temperature, min temperature, humidity, wind speed, and the general weather condition for the day, as provided by the API icon**.
+
+![User click gets extra weather info](./website/imgs/documenation/ToggleExtraWeatherInformation.gif "Upon clicking an item in the search history list, the user gets extra weather for the day")
+
+
+
+* **Error notifications** to guide the user on how to properly use the Weather Journal App (as seen in the "Testing" section below)
 
 ![A demo on error notification functionality](./website/imgs/documenation/ErrorNotifications.gif "A demo on error notification functionality")
 
@@ -123,3 +129,4 @@
 |                           |  Applying Responsive Design                       |   Extra      |  :heavy_check_mark:    |
 |                           |  Error Notification to Guide the User             |   Extra      |  :heavy_check_mark:    |
 |                           |  App Interactivity (Image Change On User Click)   |   Extra      |  :heavy_check_mark:    |
+|                           |  App Interactivity (Extra Weather Info On Click)  |   Extra      |  :heavy_check_mark:    |
