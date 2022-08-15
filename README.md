@@ -22,49 +22,49 @@
 ## Features
 
 * Complete redesign of the landing page.
-[Landing Page](./website/imgs/documenation/landingPage.png)
+![Landing Page](./website/imgs/documenation/landingPage.png "a completely new design for the landing page")
 
 * Responsive Design: The App is adaptive to different sizes of screens.
-[A Demo on the app responsive design](./website/imgs/documenation/ResponsiveDesign.gif)
+![A demo on the app responsive design](./website/imgs/documenation/ResponsiveDesign.gif "A demo on the app responsive design")
 
 * User Interactivity: The App background changes once the user clicks on a select item in the search history list.
-[User click changes the app background](./website/imgs/documenation/BackgroundChangeOnClick.gif)
+![User click changes the app background](./website/imgs/documenation/BackgroundChangeOnClick.gif "User clicks on the search history list items changes the app background")
 
 * Error notification to guide the user on how to properly use the Weather Journal App (as seen in the "Testing" section below)
-[A demo on error notification functionality](./website/imgs/documenation/ErrorNotifications.gif)
+![A demo on error notification functionality](./website/imgs/documenation/ErrorNotifications.gif "A demo on error notification functionality")
 
 
 ## Testing
 
 * Error resulting from the user entering a number in the City name input.
-[Error1](./website/imgs/documenation/error-enter-valid-city-name.png)
+![Error1](./website/imgs/documenation/error-enter-valid-city-name.png "Error notification to guide the user-app navigation")
 
 * Error resulting from the user entering a zipcode ONLY without picking a country from the dropdown list.
-[Error2](./website/imgs/documenation/error-entering-zipcode-only.png)
+![Error2](./website/imgs/documenation/error-entering-zipcode-only.png "Error notification to guide the user-app navigation")
 
 * Error resulting from the user choosing a country from the dropdown list, WITHOUT naming a city or entering a zipcode.
-[Error3](./website/imgs/documenation/error-entering-country-only.png)
+![Error3](./website/imgs/documenation/error-entering-country-only.png "Error notification to guide the user-app navigation")
 
 * Error resulting from the user leaving the "text area", and not entering how he feels.
-[Error4](./website/imgs/documenation/error-not-entering-feeling.png)
+![Error4](./website/imgs/documenation/error-not-entering-feeling.png "Error notification to guide the user-app navigation")
 
 * Error resulting from random entries by the user, such as naming a random city in a country.
-[Error5](./website/imgs/documenation/error-random-city-country.png)
+![Error5](./website/imgs/documenation/error-random-city-country.png "Error notification to guide the user-app navigation")
 
 ## Proper-use
 
 **In all the following cases, the entry in the text area is required for the app to function properly**
 
 * The User can enter a city name and a country to conduct a search
-[Landing Page](./website/imgs/documenation/proper-use-city-country.png)
-[Landing Page](./website/imgs/documenation/proper-use-city-country-res.png)
+![ProperUse1](./website/imgs/documenation/proper-use-city-country.png "A demo on how to properly use the app")
+![ProperUse2](./website/imgs/documenation/proper-use-city-country-res.png "A demo on how to properly use the app")
 
 
 * The User can enter ONLY a city name to conduct a search
-[Landing Page](./website/imgs/documenation/proper-use-city-only.png)
+![ProperUse3](./website/imgs/documenation/proper-use-city-only.png "A demo on how to properly use the app")
 
 * The User can enter a zipcode and a country to conduct a search
-[Landing Page](./website/imgs/documenation/proper-use-zipcode-country.png)
+![ProperUse4](./website/imgs/documenation/proper-use-zipcode-country.png "A demo on how to properly use the app")
 
 
 ## Tasks-Status-and-Completion
