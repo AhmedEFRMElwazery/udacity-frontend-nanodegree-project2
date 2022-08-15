@@ -1,13 +1,13 @@
 # Udacity Frontend Nanodegree - Project 2 (Weather App journal)
 
 
-[![Udacity's Logo](./website/imgs/udacityLogo.svg)](https://www.udacity.com/)
+[![Udacity's Logo](./website/imgs/udacityLogo.svg "Udacity's Logo")](https://www.udacity.com/)
 
 
 
 ## sponsored and funded by [egFWD](https://egfwd.com/) 
 
-[![egFWD - Future of Work is Digital](./website/imgs/Egypt_fwd_logo-1.png)](https://egfwd.com/)
+[![egFWD - Future of Work is Digital](./website/imgs/Egypt_fwd_logo-1.png "egFWD - Future of Work is Digital")](https://egfwd.com/)
 
 
 
@@ -39,7 +39,7 @@
 
 
 
-* Error notification to guide the user on how to properly use the Weather Journal App (as seen in the "Testing" section below)
+* Error notifications to guide the user on how to properly use the Weather Journal App (as seen in the "Testing" section below)
 
 ![A demo on error notification functionality](./website/imgs/documenation/ErrorNotifications.gif "A demo on error notification functionality")
 

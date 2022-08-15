@@ -1,5 +1,7 @@
 // Setup empty JS object to act as endpoint for all routes
-let projectData = [];
+let projectData = {};
+
+Object.entries(projectData);
 
 // Require Express to run server and routes
 const express = require('express');
@@ -24,7 +26,7 @@ app.use(express.static('website'));
 //post data
 app.post('/addCitySearchData', (req, res)=>{
     // console.log(req.body);
-    projectData.splice(0, 0, req.body);
+    projectData[`${Object.keys(projectData).length}`] = req.body;
     res.send("Data Received...");
 });
 

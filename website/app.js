@@ -63,15 +63,17 @@ const addSearchHistoryListTitles =  ()=>{
     listTitleElement.appendChild(searchDate);
     }
 
-const updateDOM = (arr)=>{
+const updateDOM = (obj)=>{
 
     addSearchHistoryListTitles();
 
-    document.querySelector('html').style.background = `url('${arr[0].cityPhoto}&w=${body.clientWidth}&h=${body.clientHeight}') no-repeat center center fixed` ;
+    let objKeyPos = `${Object.keys(obj).length-1}`;
+
+    document.querySelector('html').style.background = `url('${obj[objKeyPos].cityPhoto}&w=${body.clientWidth}&h=${body.clientHeight}') no-repeat center center fixed` ;
     document.querySelector('html').style.backgroundSize = "cover";
     document.querySelector('body').style.background = `rgba(0, 0, 0, 0.7)`;    
     
-    arr.forEach( city => {
+    for(let i=Object.keys(obj).length-1; i>=0; i--){
         const divElement = document.createElement('div');
         const anchorElement = document.createElement('a');
 
@@ -81,33 +83,35 @@ const updateDOM = (arr)=>{
         const cityNameSearched = document.createElement('div');
         cityNameSearched.classList.add('HistorySubComponent');
         cityNameSearched.setAttribute('id', 'citySearched');
-        cityNameSearched.innerHTML= `${city.cityName} (${city.countryCode})`;
+        cityNameSearched.innerHTML= `${obj[i].cityName} (${obj[i].countryCode})`;
 
         const searchDate = document.createElement('div');
         searchDate.classList.add('HistorySubComponent');
         searchDate.setAttribute('id', 'date');
-        searchDate.innerHTML= `${city.searchDate} <br/> <em style="font-size: 11px;">Time ${city.searchTime}</em>`;
+        searchDate.innerHTML= `${obj[i].searchDate} <br/> <em style="font-size: 11px;">Time ${obj[i].searchTime}</em>`;
 
         const temperature = document.createElement('div');
         temperature.classList.add('HistorySubComponent');
         temperature.setAttribute('id', 'temp');
-        temperature.innerHTML= `${city.temp}&#8457;`;
+        temperature.innerHTML= `${obj[i].temp}&#8457;`;
 
         const feelings = document.createElement('div');
         feelings.classList.add('HistorySubComponent');
         feelings.setAttribute('id', 'content');
-        feelings.innerHTML= `${city.userFeelings}`;
+        feelings.innerHTML= `${obj[i].userFeelings}`;
 
         anchorElement.appendChild(cityNameSearched);
         anchorElement.appendChild(temperature);
         anchorElement.appendChild(feelings);
         anchorElement.appendChild(searchDate);
 
+        // let extraInfoElement = document.createElement('div');
+
         anchorElement.addEventListener('click', (e)=>{
             e.preventDefault();
-            document.querySelector('html').style.background = `url('${city.cityPhoto}&w=${body.clientWidth}&h=${body.clientHeight}') no-repeat center center fixed` ;
+            document.querySelector('html').style.background = `url('${obj[i].cityPhoto}&w=${body.clientWidth}&h=${body.clientHeight}') no-repeat center center fixed` ;
             document.querySelector('html').style.backgroundSize = "cover";
-        
+            
         });
 
         divElement.appendChild(anchorElement);
@@ -117,8 +121,9 @@ const updateDOM = (arr)=>{
         zipCode.value = "";
         countryCode.value = "";
         userFeelings.value = "";
-    });
+    }
 };
+
 
 //API functions
 const getCityGeoData = async (baseurl, apikey)=>{
@@ -179,7 +184,6 @@ const getCityWeatherData = async(resp, baseUrl, apikey) =>{
             } else if(typeof resp === "object"){
                 dataToBePostedToServer["cityName"] = resp.name;
             };
-            // dataToBePostedToServer["cityName"] = retrievedWeatherData.name;
             dataToBePostedToServer["cityId"] = retrievedWeatherData.id;
             let cityPhotos = await getCityPhoto(baseUrl_unSplash, APIKey_unSplash, retrievedWeatherData.name);
             dataToBePostedToServer["cityPhoto"] = cityPhotos.results[(Math.floor(Math.random()*cityPhotos.results.length))].urls.raw;
@@ -242,6 +246,7 @@ const getDataFromServer = async(url)=>{
     });
     try{
         const dataReceived = await request.json();
+        await console.log(dataReceived);
         return dataReceived;
     }catch(error){
         console.log(`Error from the "getDataFromServer" function: ${error}`);
