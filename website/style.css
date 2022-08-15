@@ -226,3 +226,15 @@ button[type="submit"]:hover{
     text-align: center;
     border-radius: 11px;
 }
+
+@media only screen and (max-width: 800px){
+    .inputContainer{
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .inputContainer{
+        width: 100%;
+    }
+}

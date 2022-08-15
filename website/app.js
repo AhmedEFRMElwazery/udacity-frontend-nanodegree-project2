@@ -49,9 +49,9 @@ const addSearchHistoryListTitles =  ()=>{
     temperature.classList.add('list-title');
     temperature.textContent= "Temperature";
 
-    let weatherStatus = document.createElement('div');
-    weatherStatus.classList.add('list-title');
-    weatherStatus.textContent= "Condition";
+    let userFeeling = document.createElement('div');
+    userFeeling.classList.add('list-title');
+    userFeeling.textContent= "Feeling";
 
     let searchDate = document.createElement('div');
     searchDate.classList.add('list-title');
@@ -59,11 +59,13 @@ const addSearchHistoryListTitles =  ()=>{
     
     listTitleElement.appendChild(cityNameSearched);
     listTitleElement.appendChild(temperature);
-    listTitleElement.appendChild(weatherStatus);
+    listTitleElement.appendChild(userFeeling);
     listTitleElement.appendChild(searchDate);
     }
 
 const updateDOM = (arr)=>{
+
+    addSearchHistoryListTitles();
 
     document.querySelector('html').style.background = `url('${arr[0].cityPhoto}&w=${body.clientWidth}&h=${body.clientHeight}') no-repeat center center fixed` ;
     document.querySelector('html').style.backgroundSize = "cover";
@@ -108,12 +110,13 @@ const updateDOM = (arr)=>{
         
         });
 
-
         divElement.appendChild(anchorElement);
-
-        
-
         historyList.appendChild(divElement);
+
+        cityName.value = "";
+        zipCode.value = "";
+        countryCode.value = "";
+        userFeelings.value = "";
     });
 };
 
@@ -123,20 +126,15 @@ const getCityGeoData = async (baseurl, apikey)=>{
     
     if(cityName.value !== "" && countryCode.value !==""){
         finalURL= `${baseurl}direct?q=${cityName.value},${countryCode.value}&appid=${apikey}`;
-        console.log(finalURL);
     } else if(zipCode.value !== "" && countryCode.value !==""){
         finalURL= `${baseurl}zip?zip=${zipCode.value},${countryCode.value}&appid=${apikey}`;
-        console.log(finalURL);
     } else if(cityName.value !== ""){
         finalURL= `${baseurl}direct?q=${cityName.value}&appid=${apikey}`;
-        console.log(finalURL);
     }
 
     let response = await fetch (finalURL);
         try{
             let retrievedGeoData = await response.json();
-            await console.log(retrievedGeoData)
-            await console.log(typeof retrievedGeoData)
             if(retrievedGeoData.message === "not found" || Object.keys(retrievedGeoData).length === 0){
                 addNotification("We have NOT found a city with the data you provided! <br/><br/> Please verify your input.");
                 setTimeout(removeNotification, 5000);
@@ -172,7 +170,6 @@ const getCityWeatherData = async(resp, baseUrl, apikey) =>{
         let dataToBePostedToServer={};
         try{
             let retrievedWeatherData = await retrievedData.json();
-            console.log(retrievedWeatherData);
             dataToBePostedToServer["temp"] = retrievedWeatherData.main.temp;
             dataToBePostedToServer["weatherDescription"] = retrievedWeatherData.weather[0].description;
             dataToBePostedToServer["coords"] = retrievedWeatherData.coord;
@@ -189,7 +186,6 @@ const getCityWeatherData = async(resp, baseUrl, apikey) =>{
             dataToBePostedToServer["userFeelings"] = userFeelings.value;
             dataToBePostedToServer["searchDate"] = newDate;
             dataToBePostedToServer["searchTime"] = newTime;
-            console.log(dataToBePostedToServer);            
             return dataToBePostedToServer;
         } catch(error){
             console.log(`Error from the "getCityWeatherData" function: ${error}`)
@@ -209,7 +205,6 @@ const getCityPhoto = async(baseUrl, apikey, cityName)=>{
 
     try{
         let retrievedPhotos = await response.json();
-        console.log(retrievedPhotos);
         return retrievedPhotos;
     }catch(error){
         console.log(`Error from the "getCityPhoto" function: ${error}`)
@@ -247,7 +242,6 @@ const getDataFromServer = async(url)=>{
     });
     try{
         const dataReceived = await request.json();
-        console.log(dataReceived)
         return dataReceived;
     }catch(error){
         console.log(`Error from the "getDataFromServer" function: ${error}`);
@@ -272,14 +266,13 @@ submitButton.addEventListener('click', (e)=>{
     } else if (zipCode.value !== "" && countryCode.value === ""){
         addNotification("Using the zipcode requires picking a country from the list below");
         setTimeout(removeNotification, 5000);
-    }else if (!isNaN(cityName.value)){
+    }else if (!isNaN(cityName.value) && cityName.value !==""){
         addNotification("Please, enter a valid city name, not a number!");
         setTimeout(removeNotification, 5000);
     } else if (userFeelings.value === "" ){
         addNotification("Please, fill in the text area below");
         setTimeout(removeNotification, 5000);
     } else {
-        addSearchHistoryListTitles();
         historyList.innerHTML = "";
         getCityGeoData(baseUrl_GeoAPI, APIKey_OpenWeatherMap)
         .then(response => getCityWeatherData(response, baseUrl_WeatherAPI, APIKey_OpenWeatherMap))
