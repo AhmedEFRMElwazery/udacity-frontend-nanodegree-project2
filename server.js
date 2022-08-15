@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.static('website'));
 
 //post data
-app.post('/addHistory', (req, res)=>{
+app.post('/addCitySearchData', (req, res)=>{
     // console.log(req.body);
     projectData.splice(0, 0, req.body);
     res.send("Data Received...");
