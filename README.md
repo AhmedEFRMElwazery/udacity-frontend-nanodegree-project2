@@ -87,7 +87,7 @@
 
 **In all the following cases, the entry in the text area is required for the app to function properly**
 
-* The User can enter a city name and a country to conduct a search
+* The User can enter **a city name and a country** to conduct a search
 
 ![ProperUse1](./website/imgs/documenation/proper-use-city-country.png "A demo on how to properly use the app")
 
@@ -95,13 +95,13 @@
 
 
 
-* The User can enter ONLY a city name to conduct a search
+* The User can enter **a city name ONLY** to conduct a search
 
 ![ProperUse3](./website/imgs/documenation/proper-use-city-only.png "A demo on how to properly use the app")
 
 
 
-* The User can enter a zipcode and a country to conduct a search
+* The User can enter **a zipcode and a country** to conduct a search
 
 ![ProperUse4](./website/imgs/documenation/proper-use-zipcode-country.png "A demo on how to properly use the app")
 
